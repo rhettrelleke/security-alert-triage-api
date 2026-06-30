@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: security-alert-triage-api
+
+  server:
+    error:
+      include-stacktrace: never
+      include-message: always
