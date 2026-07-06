@@ -45,4 +45,13 @@ public class AlertService {
         return alertRepository.findById(id)
                 .orElseThrow(() -> new AlertNotFoundException(id));
     }
+
+    public Alert updateAlertStatus(UUID id, Status status) {
+        Alert alert = getAlertById(id);
+
+        alert.setStatus(status);
+        alert.setUpdatedAt(Instant.now());
+
+        return alertRepository.save(alert);
+    }
 }

@@ -3,6 +3,7 @@ package com.rhett.securityalerttriage.controller;
 import com.rhett.securityalerttriage.dto.AlertResponse;
 import com.rhett.securityalerttriage.dto.CreateAlertRequest;
 import com.rhett.securityalerttriage.service.AlertService;
+import com.rhett.securityalerttriage.dto.UpdateAlertStatusRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -37,5 +38,15 @@ public class AlertController {
     @GetMapping("/{id}")
     public AlertResponse getAlertById(@PathVariable UUID id) {
         return AlertResponse.fromAlert(alertService.getAlertById(id));
+    }
+
+    @PatchMapping("/{id}/status")
+    public AlertResponse updateAlertStatus(
+            @PathVariable UUID id,
+            @Valid @RequestBody UpdateAlertStatusRequest request
+    ) {
+        return AlertResponse.fromAlert(
+                alertService.updateAlertStatus(id, request.getStatus())
+        );
     }
 }
