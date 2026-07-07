@@ -69,3 +69,17 @@ PATCH /alerts/{id}/status
 
 ## Testing
 
+The project includes service-layer tests for the core alert behavior.
+
+Current tests cover:
+
+- Creating an alert assigns server-owned fields such as `id`, `status`, `createdAt`, and `updatedAt`
+- Creating an alert preserves client-provided fields such as `title`, `description`, `severity`, and `source`
+- Looking up a missing alert throws `AlertNotFoundException`
+- Updating alert status changes the status and refreshes `updatedAt`
+
+Run the test suite with:
+
+```bash
+mvn test
+
